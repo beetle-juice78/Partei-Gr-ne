@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bündnis 90/Die Grünen – Politische Präsentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-dark: #1a4a2e;
+      --green-mid: #2d7a4f;
+      --green-bright: #46b47a;
+      --green-light: #a8e6c1;
+      --green-pale: #e8f7ef;
+      --yellow: #f5d742;
+      --yellow-dark: #c9a800;
+      --white: #fafff8;
+      --text: #1a2e1f;
+      --text-muted: #5a7a63;
+      --card-bg: #ffffff;
+      --border: rgba(46,122,79,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(250,255,248,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--green-dark);
+    }
+    .nav-logo .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green-bright); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.88rem; font-weight: 500;
+      color: var(--text-muted); letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green-mid); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 2rem 80px;
+      background: linear-gradient(160deg, #e8f7ef 0%, #d4f0e0 40%, #fafff8 100%);
+    }
+    .hero-bg-circles {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-bg-circles span {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(70,180,122,0.18), transparent 70%);
+    }
+    .hero-bg-circles span:nth-child(1) { width: 700px; height: 700px; top: -200px; left: -200px; }
+    .hero-bg-circles span:nth-child(2) { width: 500px; height: 500px; bottom: -100px; right: -100px; }
+    .hero-bg-circles span:nth-child(3) { width: 300px; height: 300px; top: 40%; left: 55%; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-mid); color: #fff;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 18px; border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--green-dark);
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+    .hero-title em { color: var(--green-bright); font-style: normal; }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--text-muted); font-weight: 300;
+      max-width: 620px; line-height: 1.7;
+      margin: 1.5rem auto 0;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-scroll {
+      margin-top: 3.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+    .hero-scroll .arrow {
+      width: 28px; height: 28px; border: 2px solid var(--green-bright);
+      border-top: none; border-left: none;
+      transform: rotate(45deg);
+      animation: bounce 1.5s infinite;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 100px 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--green-bright);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; color: var(--green-dark);
+      line-height: 1.15; margin-bottom: 1.2rem;
+    }
+    .section-body {
+      font-size: 1.05rem; line-height: 1.85;
+      color: var(--text-muted); max-width: 680px;
+    }
+
+    /* ─── TIMELINE ─── */
+    #gruendung { background: #fff; }
+    .timeline {
+      position: relative; margin-top: 3.5rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--green-bright), var(--green-light));
+      border-radius: 2px;
+    }
+    .tl-item {
+      position: relative; margin-bottom: 3rem; padding-left: 2rem;
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .tl-item.visible { opacity: 1; transform: translateX(0); }
+    .tl-dot {
+      position: absolute; left: -2.65rem; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--green-bright);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--green-bright);
+    }
+    .tl-year {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      color: var(--green-mid); text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .tl-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 0.5rem;
+    }
+    .tl-text { font-size: 0.97rem; line-height: 1.75; color: var(--text-muted); }
+
+    /* ─── WERTE ─── */
+    #werte { background: var(--green-dark); color: #fff; }
+    #werte .section-title { color: var(--green-light); }
+    #werte .section-body { color: rgba(255,255,255,0.65); }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .value-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 2rem;
+      transition: transform 0.3s, background 0.3s;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+    }
+    .value-card.visible { opacity: 1; transform: translateY(0); }
+    .value-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+    .value-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .value-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--green-light); margin-bottom: 0.6rem;
+    }
+    .value-desc { font-size: 0.92rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+
+    /* ─── MITGLIEDER ─── */
+    #mitglieder { background: var(--green-pale); }
+    .members-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .member-card {
+      background: #fff; border-radius: 16px;
+      padding: 1.8rem 1.5rem; text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(26,74,46,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s;
+    }
+    .member-card.visible { opacity: 1; transform: translateY(0); }
+    .member-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(26,74,46,0.12); }
+    .member-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-bright), var(--green-mid));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin: 0 auto 1rem;
+    }
+    .member-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 0.3rem;
+    }
+    .member-role { font-size: 0.82rem; color: var(--green-mid); font-weight: 500; }
+
+    /* ─── STATS ─── */
+    #statistiken { background: #fff; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem; margin-top: 3rem;
+    }
+    .stat-card {
+      text-align: center;
+      opacity: 0; transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .stat-card.visible { opacity: 1; transform: scale(1); }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900; color: var(--green-bright); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.88rem; color: var(--text-muted);
+      margin-top: 0.5rem; font-weight: 500;
+    }
+
+    /* ─── WAHLEN ─── */
+    #wahlen { background: var(--green-pale); }
+    .election-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .election-card {
+      background: #fff; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 16px rgba(26,74,46,0.06);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .election-card.visible { opacity: 1; transform: translateY(0); }
+    .election-header {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+      color: #fff; padding: 1.2rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .election-year { font-size: 0.8rem; opacity: 0.7; font-weight: 500; }
+    .election-name {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+    }
+    .election-pct {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--yellow);
+    }
+    .election-body { padding: 1.4rem 1.5rem; }
+    .election-bar-bg {
+      background: var(--green-pale); border-radius: 100px;
+      height: 8px; margin-bottom: 0.8rem; overflow: hidden;
+    }
+    .election-bar {
+      height: 100%; border-radius: 100px;
+      background: linear-gradient(90deg, var(--green-mid), var(--green-bright));
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+      width: 0;
+    }
+    .election-bar.animated { width: var(--w); }
+    .election-meta { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── PROGRAMME ─── */
+    #programm { background: #fff; }
+    .program-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .program-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.4rem; border-radius: 12px;
+      background: var(--green-pale); border: 1px solid var(--border);
+      opacity: 0; transform: translateX(-15px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .program-item.visible { opacity: 1; transform: translateX(0); }
+    .program-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .program-text h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 0.3rem;
+    }
+    .program-text p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--green-dark); color: rgba(255,255,255,0.7);
+      text-align: center; padding: 4rem 2rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--green-light);
+      margin-bottom: 1rem;
+    }
+    .footer-divider {
+      width: 60px; height: 3px;
+      background: var(--green-bright); border-radius: 2px;
+      margin: 1.5rem auto;
+    }
+    .footer-credits {
+      font-size: 0.88rem; line-height: 1.8;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-credits strong { color: var(--green-light); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { display: none; }
+      section { padding: 70px 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    Bündnis 90/Die Grünen
+  </div>
+  <ul class="nav-links">
+    <li><a href="#gruendung">Gründung</a></li>
+    <li><a href="#werte">Werte</a></li>
+    <li><a href="#mitglieder">Mitglieder</a></li>
+    <li><a href="#wahlen">Wahlen</a></li>
+    <li><a href="#programm">Programm</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circles">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hero-badge">🌿 Politische Präsentation</div>
+  <h1 class="hero-title">Bündnis 90/<em>Die Grünen</em></h1>
+  <p class="hero-subtitle">
+    Die Partei für ökologische, soziale und liberale Politik in Deutschland –
+    seit über vier Jahrzehnten Stimme für Natur, Gerechtigkeit und Freiheit.
+  </p>
+  <div class="hero-scroll">
+    <span>Scrollen</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- GRÜNDUNG -->
+<section id="gruendung">
+  <div class="container">
+    <p class="section-label">Geschichte</p>
+    <h2 class="section-title">Die Gründung & Entstehung</h2>
+    <p class="section-body">
+      Aus der Friedens-, Umwelt- und Anti-Atomkraft-Bewegung entstanden, vereinten sich 1980 verschiedene Bürgerinitiativen zu einer neuen politischen Kraft – den Grünen.
+    </p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1977–1979</div>
+        <div class="tl-title">Vorgeschichte & Bürgerbewegungen</div>
+        <div class="tl-text">Aus der Anti-AKW-Bewegung, der Friedensbewegung und zahlreichen Bürgerinitiativen entstand eine neue politische Kraft in Deutschland. Ökologen, Pazifisten und alternative Gruppen fanden sich zusammen.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">13. Januar 1980</div>
+        <div class="tl-title">Gründung der Partei „Die Grünen"</div>
+        <div class="tl-text">In Karlsruhe wurde die Bundespartei „Die Grünen" offiziell gegründet. Das erste Programm umfasste vier Grundprinzipien: ökologisch, sozial, basisdemokratisch und gewaltfrei.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1983</div>
+        <div class="tl-title">Erster Einzug in den Bundestag</div>
+        <div class="tl-text">Mit 5,6 % der Stimmen zogen die Grünen erstmals in den Deutschen Bundestag ein – ein historischer Meilenstein für die alternative Bewegung. Petra Kelly wurde zur bekanntesten Galionsfigur.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1990</div>
+        <div class="tl-title">Wiedervereinigung & Bündnis 90</div>
+        <div class="tl-text">Nach der deutschen Wiedervereinigung schlossen sich westdeutsche Grüne und ostdeutsche Bürgerrechtsbewegungen (Bündnis 90) zusammen. Zunächst scheiterten die Westgrünen an der 5-%-Hürde.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">14. Mai 1993</div>
+        <div class="tl-title">Fusion zu Bündnis 90/Die Grünen</div>
+        <div class="tl-text">In Leipzig fusionierten Bündnis 90 und Die Grünen zur gemeinsamen Partei „Bündnis 90/Die Grünen". Damit entstand eine starke gesamtdeutsche Kraft für Ökologie und Bürgerrechte.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1998–2005</div>
+        <div class="tl-title">Erste Regierungsbeteiligung im Bund</div>
+        <div class="tl-text">In der rot-grünen Koalition unter Gerhard Schröder stellten die Grünen wichtige Minister, darunter Joschka Fischer als Außenminister. Der Atomausstieg und die Agendareformen prägten diese Ära.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2021–2025</div>
+        <div class="tl-title">Ampelkoalition & starke Präsenz</div>
+        <div class="tl-text">Mit 14,8 % zogen die Grünen in die Ampelkoalition (SPD, Grüne, FDP) ein. Robert Habeck wurde Wirtschaftsminister und Annalena Baerbock Außenministerin – ein historischer Höhepunkt der Partei.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WERTE -->
+<section id="werte">
+  <div class="container">
+    <p class="section-label" style="color:var(--green-bright)">Grundwerte</p>
+    <h2 class="section-title">Was uns antreibt</h2>
+    <p class="section-body">
+      Bündnis 90/Die Grünen basieren auf vier Grundpfeilern, die seit der Gründung 1980 das Fundament der grünen Politik bilden.
+    </p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🌱</div>
+        <div class="value-name">Ökologisch</div>
+        <div class="value-desc">Schutz natürlicher Lebensgrundlagen, Klimaschutz und nachhaltige Wirtschaft stehen im Mittelpunkt. Die Erde muss für künftige Generationen erhalten bleiben.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚖️</div>
+        <div class="value-name">Sozial</div>
+        <div class="value-desc">Gerechtigkeit, Chancengleichheit und ein starker Sozialstaat sichern den Zusammenhalt der Gesellschaft. Niemand darf zurückgelassen werden.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-name">Basisdemokratisch</div>
+        <div class="value-desc">Bürgerbeteiligung, Transparenz und Mitgestaltung von unten sind essentiell. Demokratie lebt von aktiver Teilhabe aller Menschen.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🕊️</div>
+        <div class="value-name">Gewaltfrei</div>
+        <div class="value-desc">Friedenspolitik, Abrüstung und diplomatische Lösungen statt militärischer Konflikte. Konflikte werden durch Dialog und Verständigung gelöst.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌍</div>
+        <div class="value-name">Klimagerechtigkeit</div>
+        <div class="value-desc">Der Klimawandel trifft die Ärmsten am härtesten. Grüne Politik verbindet Klimaschutz mit sozialer Gerechtigkeit weltweit.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🏳️‍🌈</div>
+        <div class="value-name">Liberalität</div>
+        <div class="value-desc">Freiheit, Vielfalt und individuelle Selbstbestimmung sind unveräußerlich. Diskriminierung jeder Art wird konsequent bekämpft.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MITGLIEDER -->
+<section id="mitglieder">
+  <div class="container">
+    <p class="section-label">Persönlichkeiten</p>
+    <h2 class="section-title">Bekannte Mitglieder & Politiker</h2>
+    <p class="section-body">
+      Viele prägende Persönlichkeiten haben die Geschichte und Politik von Bündnis 90/Die Grünen geprägt.
+    </p>
+    <div class="members-grid">
+      <div class="member-card">
+        <div class="member-avatar">🧔</div>
+        <div class="member-name">Robert Habeck</div>
+        <div class="member-role">Bundeswirtschaftsminister, Ko-Vorsitzender</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">👩</div>
+        <div class="member-name">Annalena Baerbock</div>
+        <div class="member-role">Bundesaußenministerin, Ko-Vorsitzende</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">👨‍💼</div>
+        <div class="member-name">Joschka Fischer</div>
+        <div class="member-role">Außenminister a.D., Ikone der Grünen</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">👩‍💼</div>
+        <div class="member-name">Petra Kelly</div>
+        <div class="member-role">Mitgründerin, Friedensaktivistin</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">👤</div>
+        <div class="member-name">Cem Özdemir</div>
+        <div class="member-role">Bundeslandwirtschaftsminister</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">👩‍⚖️</div>
+        <div class="member-name">Claudia Roth</div>
+        <div class="member-role">Bundestagsvizepräsidentin</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">🧑</div>
+        <div class="member-name">Anton Hofreiter</div>
+        <div class="member-role">Fraktionsvorsitzender a.D.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">👩‍🔬</div>
+        <div class="member-name">Katrin Göring-Eckardt</div>
+        <div class="member-role">Fraktionsvorsitzende a.D.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATISTIKEN -->
+<section id="statistiken">
+  <div class="container">
+    <p class="section-label">Zahlen & Fakten</p>
+    <h2 class="section-title">Die Grünen in Zahlen</h2>
+    <p class="section-body">Eindrucksvolle Zahlen belegen die Bedeutung von Bündnis 90/Die Grünen in der deutschen Politik.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">~125k</div>
+        <div class="stat-label">Mitglieder (2023)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1980</div>
+        <div class="stat-label">Gründungsjahr</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">118</div>
+        <div class="stat-label">Bundestagssitze (2021)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">14,8%</div>
+        <div class="stat-label">Bundestagswahl 2021</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">11</div>
+        <div class="stat-label">Regierungsbeteiligungen (Länder)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Bundesministerien (2021–2025)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAHLEN -->
+<section id="wahlen">
+  <div class="container">
+    <p class="section-label">Wahlergebnisse</p>
+    <h2 class="section-title">Bundestagswahlen im Überblick</h2>
+    <p class="section-body">Die Grünen haben sich von einer Protestpartei zu einer etablierten Volkspartei entwickelt – mit stetig wachsendem Einfluss.</p>
+    <div class="election-grid">
+      <div class="election-card">
+        <div class="election-header">
+          <div>
+            <div class="election-year">Bundestagswahl</div>
+            <div class="election-name">1983 – Erster Einzug</div>
+          </div>
+          <div class="election-pct">5,6%</div>
+        </div>
+        <div class="election-body">
+          <div class="election-bar-bg"><div class="election-bar" style="--w:5.6%"></div></div>
+          <div class="election-meta">Historischer Einzug in den Bundestag. 28 Sitze. Petra Kelly als Galionsfigur der Bewegung.</div>
+        </div>
+      </div>
+      <div class="election-card">
+        <div class="election-header">
+          <div>
+            <div class="election-year">Bundestagswahl</div>
+            <div class="election-name">1998 – Koalition</div>
+          </div>
+          <div class="election-pct">6,7%</div>
+        </div>
+        <div class="election-body">
+          <div class="election-bar-bg"><div class="election-bar" style="--w:6.7%"></div></div>
+          <div class="election-meta">Erste Regierungsbeteiligung im Bund. Rot-grüne Koalition mit der SPD unter Gerhard Schröder.</div>
+        </div>
+      </div>
+      <div class="election-card">
+        <div class="election-header">
+          <div>
+            <div class="election-year">Bundestagswahl</div>
+            <div class="election-name">2002 – Bestätigung</div>
+          </div>
+          <div class="election-pct">8,6%</div>
+        </div>
+        <div class="election-body">
+          <div class="election-bar-bg"><div class="election-bar" style="--w:8.6%"></div></div>
+          <div class="election-meta">Stärkstes Ergebnis der rot-grünen Ära. Koalition fortgesetzt. Joschka Fischer als populärer Außenminister.</div>
+        </div>
+      </div>
+      <div class="election-card">
+        <div class="election-header">
+          <div>
+            <div class="election-year">Bundestagswahl</div>
+            <div class="election-name">2017 – Erholung</div>
+          </div>
+          <div class="election-pct">8,9%</div>
+        </div>
+        <div class="election-body">
+          <div class="election-bar-bg"><div class="election-bar" style="--w:8.9%"></div></div>
+          <div class="election-meta">Starkes Ergebnis in der Opposition. Klimathemen rücken wieder in den Fokus. 67 Bundestagssitze.</div>
+        </div>
+      </div>
+      <div class="election-card">
+        <div class="election-header">
+          <div>
+            <div class="election-year">Bundestagswahl</div>
+            <div class="election-name">2021 – Historisch</div>
+          </div>
+          <div class="election-pct">14,8%</div>
+        </div>
+        <div class="election-body">
+          <div class="election-bar-bg"><div class="election-bar" style="--w:14.8%"></div></div>
+          <div class="election-meta">Bestes Bundestagswahlergebnis aller Zeiten! 118 Sitze. Eintritt in die Ampelkoalition mit SPD und FDP.</div>
+        </div>
+      </div>
+      <div class="election-card">
+        <div class="election-header">
+          <div>
+            <div class="election-year">Bundestagswahl</div>
+            <div class="election-name">2025 – Ergebnis</div>
+          </div>
+          <div class="election-pct">11,6%</div>
+        </div>
+        <div class="election-body">
+          <div class="election-bar-bg"><div class="election-bar" style="--w:11.6%"></div></div>
+          <div class="election-meta">Trotz des Endes der Ampelkoalition solides Ergebnis. Robert Habeck als Kanzlerkandidat. Opposition im Bundestag.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMM -->
+<section id="programm">
+  <div class="container">
+    <p class="section-label">Politik & Positionen</p>
+    <h2 class="section-title">Kernthemen & Programm</h2>
+    <p class="section-body">Die grünen Positionen umfassen ein breites Spektrum – von Klimaschutz bis Sozialpolitik, von Digitalisierung bis Außenpolitik.</p>
+    <div class="program-list">
+      <div class="program-item">
+        <div class="program-icon">⚡</div>
+        <div class="program-text">
+          <h4>Energiewende</h4>
+          <p>100 % erneuerbare Energien bis 2035. Sofortiger Kohleausstieg, Ausbau von Wind- und Solarkraft sowie grünem Wasserstoff.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">🚗</div>
+        <div class="program-text">
+          <h4>Mobilität der Zukunft</h4>
+          <p>Ausbau des ÖPNV, Förderung des Radverkehrs, Ende des Verbrennungsmotors und Investitionen in die Bahn.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">🌾</div>
+        <div class="program-text">
+          <h4>Agrarwende</h4>
+          <p>Förderung ökologischer Landwirtschaft, Tierwohl, regionale Lebensmittel und Schutz der Biodiversität.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">🏠</div>
+        <div class="program-text">
+          <h4>Soziales & Wohnen</h4>
+          <p>Bezahlbares Wohnen für alle, Kindergrundsicherung, Mindestlohn und starke soziale Absicherung.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">🌐</div>
+        <div class="program-text">
+          <h4>Außen- & Friedenspolitik</h4>
+          <p>Stärkung der EU, Multilateralismus, Menschenrechte als außenpolitischer Kompass und diplomatische Lösungen.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">💻</div>
+        <div class="program-text">
+          <h4>Digitalisierung</h4>
+          <p>Digitale Souveränität, Datenschutz, Breitbandausbau und ethische KI-Regulierung für eine faire Digitalgesellschaft.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">🎓</div>
+        <div class="program-text">
+          <h4>Bildung & Forschung</h4>
+          <p>Kostenfreie Bildung von der Kita bis zur Universität, Investitionen in Klimaforschung und Bildungsgerechtigkeit.</p>
+        </div>
+      </div>
+      <div class="program-item">
+        <div class="program-icon">🛡️</div>
+        <div class="program-text">
+          <h4>Demokratie & Rechtsstaat</h4>
+          <p>Stärkung demokratischer Institutionen, Kampf gegen Extremismus und Korruption sowie Bürgerrechte schützen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌿 Bündnis 90/Die Grünen</div>
+  <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; max-width:550px; margin:0 auto; line-height:1.7;">
+    Eine politische Präsentation über Geschichte, Werte, Mitglieder und Erfolge der deutschen Grünen Partei.
+  </p>
+  <div class="footer-divider"></div>
+  <div class="footer-credits">
+    Diese Website wurde erstellt von<br>
+    <strong>Adam Uthoff</strong> &amp; <strong>Jasper Landherr</strong>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.78rem; color:rgba(255,255,255,0.3);">
+    Bildungsprojekt · Keine offizielle Parteiwebsite · Alle Angaben ohne Gewähr
+  </p>
+</footer>
+
+<script>
+  // Intersection Observer für Animationen
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+          // Balken animieren
+          const bar = entry.target.querySelector?.('.election-bar');
+          if (bar) bar.classList.add('animated');
+        }, i * 80);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.tl-item, .value-card, .member-card, .stat-card, .election-card, .program-item')
+    .forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
